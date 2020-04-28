@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.john.repository.HouseRepository">
+    <select id="findAll" resultType="com.john.entity.House">
+        select * from house where city = #{arg0} and domain = #{arg1} and price &gt;= #{arg2} and price &lt;= #{arg3} and area &gt;= #{arg4} and area &lt;=#{arg5}
+    </select>
+    <select id="findAllInAreaOrder" resultType="com.john.entity.House">
+        select * from house where city = #{arg0} and domain = #{arg1} and price &gt;= #{arg2} and price &lt;= #{arg3} and area &gt;= #{arg4} and area &lt;=#{arg5} order by area asc
+    </select>
+    <select id="findAllInPriceOrder" resultType="com.john.entity.House">
+        select * from house where city = #{arg0} and domain = #{arg1} and price &gt;= #{arg2} and price &lt;= #{arg3} and area &gt;= #{arg4} and area &lt;=#{arg5} order by price asc
+    </select>
+</mapper>
