@@ -28,25 +28,19 @@ public class HouseHandler {
         List<House> houses = new ArrayList<>();
         switch (order) {
             case "disorder":
-                houses = houseService.findAll(city, domain,
-                        Integer.parseInt(minPrice),
-                        Integer.parseInt(maxPrice),
-                        Integer.parseInt(minArea),
-                        Integer.parseInt(maxArea));
+                houses = houseService.findAll(city, domain, minPrice, maxPrice, minArea, maxArea);
                 break;
-            case "areaOrder":
-                houses = houseService.findAllInAreaOrder(city, domain,
-                        Integer.parseInt(minPrice),
-                        Integer.parseInt(maxPrice),
-                        Integer.parseInt(minArea),
-                        Integer.parseInt(maxArea));
+            case "areaOrderAsc":
+                houses = houseService.findAllInAreaOrderAsc(city, domain, minPrice, maxPrice, minArea, maxArea);
                 break;
-            case "priceOrder":
-                houses = houseService.findAllInPriceOrder(city, domain,
-                        Integer.parseInt(minPrice),
-                        Integer.parseInt(maxPrice),
-                        Integer.parseInt(minArea),
-                        Integer.parseInt(maxArea));
+            case "areaOrderDesc":
+                houses = houseService.findAllInAreaOrderDesc(city, domain, minPrice, maxPrice, minArea, maxArea);
+                break;
+            case "priceOrderAsc":
+                houses = houseService.findAllInPriceOrderAsc(city, domain, minPrice, maxPrice, minArea, maxArea);
+                break;
+            case "priceOrderDesc":
+                houses = houseService.findAllInPriceOrderDesc(city, domain, minPrice, maxPrice, minArea, maxArea);
                 break;
         }
         ModelAndView modelAndView = new ModelAndView("index");

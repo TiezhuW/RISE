@@ -15,17 +15,27 @@ public class HouseServiceImpl implements HouseService {
     private HouseRepository houseRepository;
 
     @Override
-    public List<House> findAll(String city, String domain, int minPrice, int maxPrice, int minArea, int maxArea) {
+    public List<House> findAll(String city, String domain, String minPrice, String maxPrice, String minArea, String maxArea) {
         return houseRepository.findAll(city, domain, minPrice, maxPrice, minArea, maxArea);
     }
 
     @Override
-    public List<House> findAllInAreaOrder(String city, String domain, int minPrice, int maxPrice, int minArea, int maxArea) {
-        return houseRepository.findAllInAreaOrder(city, domain, minPrice, maxPrice, minArea, maxArea);
+    public List<House> findAllInAreaOrderAsc(String city, String domain, String minPrice, String maxPrice, String minArea, String maxArea) {
+        return houseRepository.findAllInAreaOrderAsc(city, domain, minPrice, maxPrice, minArea, maxArea);
     }
 
     @Override
-    public List<House> findAllInPriceOrder(String city, String domain, int minPrice, int maxPrice, int minArea, int maxArea) {
-        return houseRepository.findAllInPriceOrder(city, domain, minPrice, maxPrice, minArea, maxArea);
+    public List<House> findAllInAreaOrderDesc(String city, String domain, String minPrice, String maxPrice, String minArea, String maxArea) {
+        return houseRepository.findAllInAreaOrderDesc(city, domain, minPrice, maxPrice, minArea, maxArea);
+    }
+
+    @Override
+    public List<House> findAllInPriceOrderAsc(String city, String domain, String minPrice, String maxPrice, String minArea, String maxArea) {
+        return houseRepository.findAllInPriceOrderAsc(city, domain, minPrice, maxPrice, minArea, maxArea);
+    }
+
+    @Override
+    public List<House> findAllInPriceOrderDesc(String city, String domain, String minPrice, String maxPrice, String minArea, String maxArea) {
+        return houseRepository.findAllInPriceOrderDesc(city, domain, minPrice, maxPrice, minArea, maxArea);
     }
 }

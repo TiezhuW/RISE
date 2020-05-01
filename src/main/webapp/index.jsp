@@ -54,9 +54,12 @@
             面积：
             <input type="text" name="minArea"> 平方米 ~ <input type="text" name="maxArea"> 平方米
             <br/>
+            排序：
             <input type="radio" name="order" value="disorder" checked> 不排序
-            <input type="radio" name="order" value="areaOrder"> 按面积升序
-            <input type="radio" name="order" value="priceOrder"> 按价格升序
+            <input type="radio" name="order" value="areaOrderAsc"> 按面积升序
+            <input type="radio" name="order" value="areaOrderDesc"> 按面积降序
+            <input type="radio" name="order" value="priceOrderAsc"> 按价格升序
+            <input type="radio" name="order" value="priceOrderDesc"> 按价格降序
             <br/>
             <input type="submit" value="搜索">
         </form>
