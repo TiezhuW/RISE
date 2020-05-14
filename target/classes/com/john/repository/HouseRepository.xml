@@ -21,6 +21,7 @@
                 and area &lt;= #{arg5}
             </if>
         </where>
+        order by clicktimes desc
     </select>
 
     <select id="findAllInAreaOrderAsc" resultType="com.john.entity.House">
@@ -44,6 +45,7 @@
         </where>
         order by area asc
     </select>
+
     <select id="findAllInAreaOrderDesc" resultType="com.john.entity.House">
         select *
         from house
@@ -87,6 +89,7 @@
         </where>
         order by price asc
     </select>
+
     <select id="findAllInPriceOrderDesc" resultType="com.john.entity.House">
         select *
         from house
@@ -108,4 +111,8 @@
         </where>
         order by price desc
     </select>
+
+    <update id="clickTimesInc">
+        update house set clicktimes = clicktimes + 1 where url = #{arg0}
+    </update>
 </mapper>

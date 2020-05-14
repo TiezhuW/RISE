@@ -46,8 +46,7 @@
             <select name="domain">
                 <option/>
             </select>
-             区/县
-            <br/>
+             区/县 <p>${msg}</p>
             价格：
             <input type="text" name="minPrice"> 元/月 ~ <input type="text" name="maxPrice"> 元/月
             <br/>
@@ -69,33 +68,34 @@
     <section>
         <table>
             <tr>
-                <td>城市</td>
-                <td>区域</td>
-                <td>朝向</td>
-                <td>出租类型</td>
-                <td>房源概述</td>
-                <td>面积/平方米</td>
-                <td>楼层</td>
-                <td>房屋样式</td>
-                <td>电梯</td>
-                <td>地址</td>
-                <td>价格</td>
-                <td>链接</td>
+                <td> 城市 </td>
+                <td> 区域 </td>
+                <td> 朝向 </td>
+                <td> 出租类型 </td>
+                <td> 房源概述 </td>
+                <td> 面积/平方米 </td>
+                <td> 楼层 </td>
+                <td> 房屋样式 </td>
+                <td> 电梯 </td>
+                <td> 地址 </td>
+                <td> 价格 </td>
+                <td> 链接 </td>
             </tr>
             <c:forEach items="${houses}" var="house">
                 <tr>
-                    <td>${house.city}</td>
-                    <td>${house.domain}</td>
-                    <td>${house.direction}</td>
-                    <td>${house.type}</td>
-                    <td>${house.name}</td>
-                    <td>${house.area}</td>
-                    <td>${house.floor}</td>
-                    <td>${house.layout}</td>
-                    <td>${house.lift}</td>
-                    <td>${house.location}</td>
-                    <td>${house.price}</td>
-                    <td><a href="${house.url}">点击此处浏览详情</a></td>
+                    <td> ${house.city} </td>
+                    <td> ${house.domain} </td>
+                    <td> ${house.direction} </td>
+                    <td> ${house.type} </td>
+                    <td> ${house.name} </td>
+                    <td> ${house.area} </td>
+                    <td> ${house.floor} </td>
+                    <td> ${house.layout} </td>
+                    <td> ${house.lift} </td>
+                    <td> ${house.location} </td>
+                    <td> ${house.price} </td>
+<%--                    <td> <a href="javascript:void(0);" onclick="clickTimesInc(${house.url})">详情</a> </td>--%>
+                    <td> <button onclick="clickTimesInc('${house.url}')">详情</button> </td>
                 </tr>
             </c:forEach>
         </table>
@@ -103,6 +103,7 @@
 
     <footer>
         <hr/>
+<%--        <button onclick="ajaxTest()">Test</button>--%>
         <p>开发者：王海兴、乐严彬、李光辉</p>
     </footer>
 
@@ -110,9 +111,20 @@
         if ("${sessionScope.username}".length == 0){
             document.getElementById("login").innerHTML = "登录";
             document.getElementById("login").setAttribute("href", "/user/loginPage");
+            // document.getElementsByClassName("collect").style.display = "none";
         } else {
             document.getElementById("login").innerHTML = "${sessionScope.username}";
             document.getElementById("login").setAttribute("href", "/user/info");
+            // document.getElementsByClassName("collect").style.display = "inline";
+        }
+
+        function clickTimesInc(url) {
+            console.log(url);
+            let xmlHttpRequest = new XMLHttpRequest();
+            xmlHttpRequest.open("POST", "inc", true);
+            xmlHttpRequest.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            xmlHttpRequest.send("url=" + url);
+            window.open(url);
         }
 
         function domainSelectChange() {

@@ -38,4 +38,9 @@ public class HouseServiceImpl implements HouseService {
     public List<House> findAllInPriceOrderDesc(String city, String domain, String minPrice, String maxPrice, String minArea, String maxArea) {
         return houseRepository.findAllInPriceOrderDesc(city, domain, minPrice, maxPrice, minArea, maxArea);
     }
+
+    @Override
+    public void clickTimesInc(String url) {
+        houseRepository.clickTimesInc(url);
+    }
 }

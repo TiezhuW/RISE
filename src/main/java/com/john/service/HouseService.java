@@ -12,4 +12,6 @@ public interface HouseService {
 
     List<House> findAllInPriceOrderAsc(String city, String domain, String minPrice, String maxPrice, String minArea, String maxArea);
     List<House> findAllInPriceOrderDesc(String city, String domain, String minPrice, String maxPrice, String minArea, String maxArea);
+
+    void clickTimesInc(String url);
 }
