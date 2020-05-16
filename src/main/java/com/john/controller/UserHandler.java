@@ -1,6 +1,8 @@
 package com.john.controller;
 
+import com.john.entity.House;
 import com.john.entity.User;
+import com.john.service.HouseService;
 import com.john.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,6 +22,9 @@ import java.util.regex.Pattern;
 public class UserHandler {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private HouseService houseService;
 
     @GetMapping("/loginPage")
     public String loginPage(){
@@ -90,9 +97,21 @@ public class UserHandler {
         return modelAndView;
     }
 
-    @GetMapping("/info")
-    public String info(){
-        return "userInfo";
+    @GetMapping(value = "/info", params = {"username"})
+    public ModelAndView info(String username){
+        ModelAndView modelAndView = new ModelAndView("userInfo");
+        User user = userService.getUser(username);
+        if (user.getCollection() == null) {
+            return modelAndView;
+        }
+        List<House> collection = user.getCollection();
+        List<House> outputCollection = new ArrayList<>();
+        for (House house:collection){
+            house = houseService.findByUrl(house.getUrl());
+            outputCollection.add(house);
+        }
+        modelAndView.addObject("collection", outputCollection);
+        return modelAndView;
     }
 
     @GetMapping("/quit")

@@ -17,8 +17,8 @@
 <body>
     <header>
         <a id="login"></a>
-        <a href="/user/registerPage">注册</a>
-        <h1>租房信息搜索引擎</h1>
+        <a href="/user/registerPage"> 注册 </a>
+        <a href="/house/homepage"> <h1>租房信息搜索引擎</h1> </a>
     </header>
 
     <nav>
@@ -46,7 +46,7 @@
             <select name="domain">
                 <option/>
             </select>
-             区/县 <p>${msg}</p>
+             区/县 <p>${nullCityAndDomain}</p>
             价格：
             <input type="text" name="minPrice"> 元/月 ~ <input type="text" name="maxPrice"> 元/月
             <br/>
@@ -94,8 +94,9 @@
                     <td> ${house.lift} </td>
                     <td> ${house.location} </td>
                     <td> ${house.price} </td>
-<%--                    <td> <a href="javascript:void(0);" onclick="clickTimesInc(${house.url})">详情</a> </td>--%>
-                    <td> <button onclick="clickTimesInc('${house.url}')">详情</button> </td>
+                    <td> <button onclick="moreInfo('${house.url}')"> 详情 </button> </td>
+                    <td> <button onclick="collect('${sessionScope.username}', '${house.url}')"> 收藏 </button> </td>
+                    <td> <button onclick="comment('${house.url}')"> 评价 </button> </td>
                 </tr>
             </c:forEach>
         </table>
@@ -103,25 +104,43 @@
 
     <footer>
         <hr/>
-<%--        <button onclick="ajaxTest()">Test</button>--%>
         <p>开发者：王海兴、乐严彬、李光辉</p>
     </footer>
 
     <script>
         if ("${sessionScope.username}".length == 0){
-            document.getElementById("login").innerHTML = "登录";
+            document.getElementById("login").innerHTML = " 登录 ";
             document.getElementById("login").setAttribute("href", "/user/loginPage");
             // document.getElementsByClassName("collect").style.display = "none";
         } else {
             document.getElementById("login").innerHTML = "${sessionScope.username}";
-            document.getElementById("login").setAttribute("href", "/user/info");
+            document.getElementById("login").setAttribute("href", "/user/info?username=" + "${sessionScope.username}");
             // document.getElementsByClassName("collect").style.display = "inline";
         }
 
-        function clickTimesInc(url) {
-            console.log(url);
+        function collect(username, url) {
+            if (username.length == 0) {
+                alert("请先登录再收藏");
+            } else {
+                let xmlHttpRequest = new XMLHttpRequest();
+                xmlHttpRequest.open("POST", "/house/collect", true);
+                xmlHttpRequest.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+                xmlHttpRequest.send("username=" + username + "&url=" + url);
+                alert("已收藏");
+            }
+        }
+
+        function comment(url) {
+            //more
             let xmlHttpRequest = new XMLHttpRequest();
-            xmlHttpRequest.open("POST", "inc", true);
+            xmlHttpRequest.open("POST", "/house/comment", true);
+            xmlHttpRequest.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            xmlHttpRequest.send("url=" + url);
+        }
+
+        function moreInfo(url) {
+            let xmlHttpRequest = new XMLHttpRequest();
+            xmlHttpRequest.open("POST", "/house/moreInfo", true);
             xmlHttpRequest.setRequestHeader("Content-type","application/x-www-form-urlencoded");
             xmlHttpRequest.send("url=" + url);
             window.open(url);

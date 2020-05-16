@@ -5,9 +5,23 @@
     <insert id="addUser" parameterType="com.john.entity.User">
         insert into user values (#{username}, #{password}, #{email}, #{phone})
     </insert>
-    <select id="findByUsername" parameterType="java.lang.String" resultType="com.john.entity.User">
-        select * from user where username = #{username}
+
+    <resultMap id="userMap" type="com.john.entity.User">
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="email" property="email"/>
+        <result column="phone" property="phone"/>
+        <collection property="collection" ofType="com.john.entity.House">
+            <result column="url" property="url"/>
+        </collection>
+    </resultMap>
+    <select id="findByUsername" parameterType="java.lang.String" resultMap="userMap">
+        select u.username as username, u.password as password, u.email as email, u.phone as phone, c.house_url as url
+        from user u left join collection c
+        on u.username = c.username
+        where u.username = #{username}
     </select>
+
     <select id="findPasswordByUsername" parameterType="java.lang.String" resultType="java.lang.String">
         select password from user where username = #{username}
     </select>

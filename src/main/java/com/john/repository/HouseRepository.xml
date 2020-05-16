@@ -112,7 +112,19 @@
         order by price desc
     </select>
 
-    <update id="clickTimesInc">
-        update house set clicktimes = clicktimes + 1 where url = #{arg0}
+    <update id="clickTimesInc" parameterType="java.lang.String">
+        update house set clicktimes = clicktimes + 1 where url = #{url}
     </update>
+
+    <select id="findByUrl" parameterType="java.lang.String" resultType="com.john.entity.House">
+        select * from house where url = #{url}
+    </select>
+
+    <insert id="addCollection">
+        insert into collection values (#{arg0}, #{arg1})
+    </insert>
+
+    <delete id="deleteCollection">
+        delete from collection where username = #{arg0} and house_url = #{arg1}
+    </delete>
 </mapper>

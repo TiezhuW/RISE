@@ -4,6 +4,7 @@ import com.john.entity.House;
 import com.john.service.HouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,12 +20,6 @@ public class HouseHandler {
     @Autowired
     private HouseService houseService;
 
-//    @GetMapping(value = "/test", params = {"a", "b"})
-//    public String test(String a, String b){
-//        System.out.println(a + " " + b);
-//        return "index";
-//    }
-
     @GetMapping("/homepage")
     public String homepage() {
         return "index";
@@ -35,7 +30,7 @@ public class HouseHandler {
         ModelAndView modelAndView = new ModelAndView("index");
         if (city.equals("") || domain.equals("")){
             String msg = "请选择城市和区域";
-            modelAndView.addObject("msg",msg);
+            modelAndView.addObject("nullCityAndDomain",msg);
             return modelAndView;
         }
         List<House> houses = new ArrayList<>();
@@ -60,10 +55,28 @@ public class HouseHandler {
         return modelAndView;
     }
 
-    @PostMapping(value = "/inc", params = {"url"})
-    public String clickTimesInc(String url){
-        System.out.println(url);
-        houseService.clickTimesInc(url);
+    @PostMapping(value = "/moreInfo", params = {"url"})
+    public String moreInfo(String url){
+        houseService.moreInfo(url);
         return "index";
+    }
+
+    @PostMapping(value = "/collect", params = {"username", "url"})
+    public String collect(String username, String url){
+        houseService.collect(username, url);
+        return "index";
+    }
+
+    @PostMapping(value = "/cancelCollect", params = {"username", "url"})
+    public String cancelCollect(String username, String url){
+        houseService.cancelCollect(username, url);
+        return "userInfo";
+    }
+
+    @PostMapping(value = "/comment", params = {"url"})
+    public String comment(String url){
+        //more
+        System.out.println("comment " + url);
+        return "comment";
     }
 }
