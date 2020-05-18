@@ -69,10 +69,10 @@
 
         function cancelCollect(username, url) {
             let xmlHttpRequest1 = new XMLHttpRequest();
-            xmlHttpRequest1.open("POST", "/house/cancelCollect", true);
+            xmlHttpRequest1.open("POST", "/house/cancelCollect", false);
             xmlHttpRequest1.setRequestHeader("Content-type","application/x-www-form-urlencoded");
             xmlHttpRequest1.send("username=" + username + "&url=" + url);
-            //refresh
+            window.location.href = window.location.href;    //刷新
         }
     </script>
 </body>

@@ -56,7 +56,6 @@
                 <td> <button onclick="cancelCollect('${sessionScope.username}', '${house.url}')"> 取消收藏 </button> </td>
             </tr>
         </c:forEach>
-        <!-- for each house information and collection-cancel button -->
     </table>
 
     <script>
@@ -70,12 +69,10 @@
 
         function cancelCollect(username, url) {
             let xmlHttpRequest1 = new XMLHttpRequest();
-            xmlHttpRequest1.open("POST", "/house/cancelCollect", true);
+            xmlHttpRequest1.open("POST", "/house/cancelCollect", false);
             xmlHttpRequest1.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-            // xmlHttpRequest1.setRequestHeader("If-Modified-Since", "0");
-            // xmlHttpRequest1.setRequestHeader("Cache-Control", "no-cache");
             xmlHttpRequest1.send("username=" + username + "&url=" + url);
-            window.document.location.reload();
+            window.location.href = window.location.href;
         }
     </script>
 </body>
