@@ -5,7 +5,7 @@
   Time: 16:40
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -48,19 +48,19 @@
             </select>
              区/县 <p>${nullCityAndDomain}</p>
             价格：
-            <input type="text" name="minPrice"> 元/月 ~ <input type="text" name="maxPrice"> 元/月
+            <input type="text" name="minPrice"/> 元/月 ~ <input type="text" name="maxPrice"/> 元/月
             <br/>
             面积：
-            <input type="text" name="minArea"> 平方米 ~ <input type="text" name="maxArea"> 平方米
+            <input type="text" name="minArea"/> 平方米 ~ <input type="text" name="maxArea"/> 平方米
             <br/>
             排序：
-            <input type="radio" name="order" value="disorder" checked> 不排序
-            <input type="radio" name="order" value="areaOrderAsc"> 按面积升序
-            <input type="radio" name="order" value="areaOrderDesc"> 按面积降序
-            <input type="radio" name="order" value="priceOrderAsc"> 按价格升序
-            <input type="radio" name="order" value="priceOrderDesc"> 按价格降序
+            <input type="radio" name="order" value="disorder" checked/> 不排序
+            <input type="radio" name="order" value="areaOrderAsc"/> 按面积升序
+            <input type="radio" name="order" value="areaOrderDesc"/> 按面积降序
+            <input type="radio" name="order" value="priceOrderAsc"/> 按价格升序
+            <input type="radio" name="order" value="priceOrderDesc"/> 按价格降序
             <br/>
-            <input type="submit" value="搜索">
+            <input type="submit" value="搜索"/>
         </form>
         <hr/>
     </nav>
@@ -111,11 +111,9 @@
         if ("${sessionScope.username}".length == 0){
             document.getElementById("login").innerHTML = " 登录 ";
             document.getElementById("login").setAttribute("href", "/user/loginPage");
-            // document.getElementsByClassName("collect").style.display = "none";
         } else {
             document.getElementById("login").innerHTML = "${sessionScope.username}";
             document.getElementById("login").setAttribute("href", "/user/info?username=" + "${sessionScope.username}");
-            // document.getElementsByClassName("collect").style.display = "inline";
         }
 
         function collect(username, url) {
@@ -126,16 +124,23 @@
                 xmlHttpRequest.open("POST", "/house/collect", true);
                 xmlHttpRequest.setRequestHeader("Content-type","application/x-www-form-urlencoded");
                 xmlHttpRequest.send("username=" + username + "&url=" + url);
+                //判断是否完成
                 alert("已收藏");
             }
         }
 
         function comment(url) {
-            //more
             let xmlHttpRequest = new XMLHttpRequest();
+            xmlHttpRequest.onreadystatechange = function() {
+                if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200) {
+                    window.location.href = "/house/comment";
+                }
+            };
             xmlHttpRequest.open("POST", "/house/comment", true);
             xmlHttpRequest.setRequestHeader("Content-type","application/x-www-form-urlencoded");
             xmlHttpRequest.send("url=" + url);
+            // xmlHttpRequest.open("GET", "/house/comment?url=" + url, true);
+            // xmlHttpRequest.send();
         }
 
         function moreInfo(url) {

@@ -5,7 +5,7 @@
   Time: 15:14
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -33,7 +33,18 @@
             <td> 链接 </td>
         </tr>
         <tr>
-            <!-- house information -->
+            <td> ${house.city} </td>
+            <td> ${house.domain} </td>
+            <td> ${house.direction} </td>
+            <td> ${house.type} </td>
+            <td> ${house.name} </td>
+            <td> ${house.area} </td>
+            <td> ${house.floor} </td>
+            <td> ${house.layout} </td>
+            <td> ${house.lift} </td>
+            <td> ${house.location} </td>
+            <td> ${house.price} </td>
+            <td> <button onclick="moreInfo('${house.url}')"> 详情 </button> </td>
         </tr>
     </table>
 
@@ -41,7 +52,7 @@
     <!-- action -->
     <form action="" method="post">
         <textarea name="comment" rows="14" cols="40"></textarea> <br/>
-        <input type="submit" value="评价">
+        <input type="submit" value="评价"/>
     </form>
 
     <table>
@@ -50,7 +61,23 @@
             <td> 时间 </td>
             <td> 评论 </td>
         </tr>
-        <!-- for each comment -->
+        <c:forEach items="${comments}" var="comment">
+            <tr>
+                <td> ${comment.user.username} </td>
+                <td> ${comment.time} </td>
+                <td> ${comment.comment} </td>
+            </tr>
+        </c:forEach>
     </table>
+
+    <script>
+        function moreInfo(url) {
+            let xmlHttpRequest = new XMLHttpRequest();
+            xmlHttpRequest.open("POST", "/house/moreInfo", true);
+            xmlHttpRequest.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            xmlHttpRequest.send("url=" + url);
+            window.open(url);
+        }
+    </script>
 </body>
 </html>

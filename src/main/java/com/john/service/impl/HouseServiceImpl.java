@@ -1,5 +1,6 @@
 package com.john.service.impl;
 
+import com.john.entity.Comment;
 import com.john.entity.House;
 import com.john.repository.HouseRepository;
 import com.john.service.HouseService;
@@ -57,5 +58,10 @@ public class HouseServiceImpl implements HouseService {
     @Override
     public House findByUrl(String url) {
         return houseRepository.findByUrl(url);
+    }
+
+    @Override
+    public List<Comment> findCommentByUrl(String url) {
+        return houseRepository.findCommentByUrl(url);
     }
 }

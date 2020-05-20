@@ -1,5 +1,6 @@
 package com.john.repository;
 
+import com.john.entity.Comment;
 import com.john.entity.House;
 
 import java.util.Collection;
@@ -18,4 +19,6 @@ public interface HouseRepository {
 
     void addCollection(String username, String url);
     void deleteCollection(String username, String url);
+
+    List<Comment> findCommentByUrl(String url);
 }

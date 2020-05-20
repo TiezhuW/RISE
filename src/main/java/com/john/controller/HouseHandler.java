@@ -1,13 +1,11 @@
 package com.john.controller;
 
+import com.john.entity.Comment;
 import com.john.entity.House;
 import com.john.service.HouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -74,9 +72,17 @@ public class HouseHandler {
     }
 
     @PostMapping(value = "/comment", params = {"url"})
-    public String comment(String url){
-        //more
-        System.out.println("comment " + url);
-        return "comment";
+    public ModelAndView comment(String url){
+        ModelAndView modelAndView = new ModelAndView("comment");
+        House house = houseService.findByUrl(url);
+        modelAndView.addObject("house", house);
+        List<Comment> comments = houseService.findCommentByUrl(url);
+        modelAndView.addObject("comments", comments);
+        return modelAndView;
     }
+
+//    @GetMapping("/comment")
+//    public String comment(){
+//        return "comment";
+//    }
 }

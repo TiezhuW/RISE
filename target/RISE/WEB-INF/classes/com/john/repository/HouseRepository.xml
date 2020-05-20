@@ -127,4 +127,18 @@
     <delete id="deleteCollection">
         delete from collection where username = #{arg0} and house_url = #{arg1}
     </delete>
+
+    <resultMap id="commentMap" type="com.john.entity.Comment">
+        <result column="time" property="time"/>
+        <result column="comment" property="comment"/>
+        <association property="user" javaType="com.john.entity.User">
+           <result column="username" property="username"/>
+        </association>
+        <association property="house" javaType="com.john.entity.House">
+            <result column="house_url" property="url"/>
+        </association>
+    </resultMap>
+    <select id="findCommentByUrl" parameterType="java.lang.String" resultMap="commentMap">
+        select * from comment where house_url = #{url}
+    </select>
 </mapper>

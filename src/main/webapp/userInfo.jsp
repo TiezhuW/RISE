@@ -5,7 +5,7 @@
   Time: 21:58
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8"%>
 <%@ page isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -68,11 +68,14 @@
         }
 
         function cancelCollect(username, url) {
-            let xmlHttpRequest1 = new XMLHttpRequest();
-            xmlHttpRequest1.open("POST", "/house/cancelCollect", false);
-            xmlHttpRequest1.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-            xmlHttpRequest1.send("username=" + username + "&url=" + url);
-            window.location.href = window.location.href;    //刷新
+            let xmlHttpRequest = new XMLHttpRequest();
+            xmlHttpRequest.open("POST", "/house/cancelCollect", true);
+            xmlHttpRequest.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            xmlHttpRequest.send("username=" + username + "&url=" + url);
+            xmlHttpRequest.onreadystatechange = function() {
+                if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200)
+                    window.location.href = window.location.href;    //刷新
+            };
         }
     </script>
 </body>

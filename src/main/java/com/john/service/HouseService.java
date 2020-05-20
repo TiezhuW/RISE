@@ -1,5 +1,6 @@
 package com.john.service;
 
+import com.john.entity.Comment;
 import com.john.entity.House;
 
 import java.util.List;
@@ -17,4 +18,6 @@ public interface HouseService {
     void cancelCollect(String username, String url);
 
     House findByUrl(String url);
+
+    List<Comment> findCommentByUrl(String url);
 }
