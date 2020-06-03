@@ -3,7 +3,6 @@ package com.john.repository;
 import com.john.entity.Comment;
 import com.john.entity.House;
 
-import java.util.Collection;
 import java.util.List;
 
 public interface HouseRepository {
@@ -21,4 +20,6 @@ public interface HouseRepository {
     void deleteCollection(String username, String url);
 
     List<Comment> findCommentByUrl(String url);
+    void addComment(String username, String url, String time, String comment);
+    Comment findCommentByUsernameAndUrl(String username, String url);
 }

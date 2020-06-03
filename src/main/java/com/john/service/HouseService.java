@@ -20,4 +20,6 @@ public interface HouseService {
     House findByUrl(String url);
 
     List<Comment> findCommentByUrl(String url);
+    Comment findCommentByUsernameAndUrl(String username, String url);
+    void addComment(String username, String url, String time, String comment);
 }

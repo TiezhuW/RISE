@@ -64,4 +64,14 @@ public class HouseServiceImpl implements HouseService {
     public List<Comment> findCommentByUrl(String url) {
         return houseRepository.findCommentByUrl(url);
     }
+
+    @Override
+    public Comment findCommentByUsernameAndUrl(String username, String url) {
+        return houseRepository.findCommentByUsernameAndUrl(username, url);
+    }
+
+    @Override
+    public void addComment(String username, String url, String time, String comment) {
+        houseRepository.addComment(username, url, time, comment);
+    }
 }

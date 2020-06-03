@@ -17,14 +17,14 @@
     <h2>注册</h2>
 
     <form action="/user/register" method="post">
-        用户名： <input type="text" name="username"><p>${usernameMsg}</p><br/>
-        密码： <input type="password" name="password"><p>${passwordMsg}</p><br/>
-        邮箱： <input type="email" name="email"><p>${emailMsg}</p><br/>
-        手机号： <input type="text" name="phone"><p>${phoneMsg}</p><br/>
-        <input type="submit" value="注册">
+        用户名： <input type="text" name="username"/><p> ${usernameMsg} </p><br/>
+        密码： <input type="password" name="password"/><p> ${passwordMsg} </p><br/>
+        邮箱： <input type="email" name="email"/><p> ${emailMsg} </p><br/>
+        手机号： <input type="text" name="phone"/><p> ${phoneMsg} </p><br/>
+        <input type="submit" value=" 注册 "/>
     </form>
 
-    <p>${msg}</p>
-    <button onclick="location='/house/homepage'">返回首页</button>
+    <p> ${msg} </p>
+    <button onclick="location='/house/homepage'"> 返回首页 </button>
 </body>
 </html>

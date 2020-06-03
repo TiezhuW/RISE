@@ -18,7 +18,7 @@
     <header>
         <a id="login"></a>
         <a href="/user/registerPage"> 注册 </a>
-        <a href="/house/homepage"> <h1>租房信息搜索引擎</h1> </a>
+        <a href="/house/homepage"> <h1> 租房信息搜索引擎 </h1> </a>
     </header>
 
     <nav>
@@ -46,7 +46,7 @@
             <select name="domain">
                 <option/>
             </select>
-             区/县 <p>${nullCityAndDomain}</p>
+             区/县 <p> ${nullCityAndDomain} </p>
             价格：
             <input type="text" name="minPrice"/> 元/月 ~ <input type="text" name="maxPrice"/> 元/月
             <br/>
@@ -54,11 +54,11 @@
             <input type="text" name="minArea"/> 平方米 ~ <input type="text" name="maxArea"/> 平方米
             <br/>
             排序：
-            <input type="radio" name="order" value="disorder" checked/> 不排序
-            <input type="radio" name="order" value="areaOrderAsc"/> 按面积升序
-            <input type="radio" name="order" value="areaOrderDesc"/> 按面积降序
-            <input type="radio" name="order" value="priceOrderAsc"/> 按价格升序
-            <input type="radio" name="order" value="priceOrderDesc"/> 按价格降序
+            <input type="radio" name="order" value="disorder" checked id="order1"/> <label for="order1"> 不排序 </label>
+            <input type="radio" name="order" value="areaOrderAsc" id="order2"/> <label for="order2"> 按面积升序 </label>
+            <input type="radio" name="order" value="areaOrderDesc" id="order3"/> <label for="order3"> 按面积降排序 </label>
+            <input type="radio" name="order" value="priceOrderAsc" id="order4"/> <label for="order4"> 按价格升序 </label>
+            <input type="radio" name="order" value="priceOrderDesc" id="order5"/> <label for="order5"> 按价格降序 </label>
             <br/>
             <input type="submit" value="搜索"/>
         </form>
@@ -96,7 +96,7 @@
                     <td> ${house.price} </td>
                     <td> <button onclick="moreInfo('${house.url}')"> 详情 </button> </td>
                     <td> <button onclick="collect('${sessionScope.username}', '${house.url}')"> 收藏 </button> </td>
-                    <td> <button onclick="comment('${house.url}')"> 评价 </button> </td>
+                    <td> <button onclick="commentLook('${sessionScope.username}', '${house.url}')"> 评价 </button> </td>
                 </tr>
             </c:forEach>
         </table>
@@ -112,8 +112,16 @@
             document.getElementById("login").innerHTML = " 登录 ";
             document.getElementById("login").setAttribute("href", "/user/loginPage");
         } else {
-            document.getElementById("login").innerHTML = "${sessionScope.username}";
+            document.getElementById("login").innerHTML = "${sessionScope.username}" + "（已登录）";
             document.getElementById("login").setAttribute("href", "/user/info?username=" + "${sessionScope.username}");
+        }
+
+        function commentLook(username, url) {
+            if (username.length == 0) {
+                alert("请先登录后评论");
+            } else {
+                window.open("/house/comment/look?url=" + url);
+            }
         }
 
         function collect(username, url) {
@@ -121,26 +129,18 @@
                 alert("请先登录再收藏");
             } else {
                 let xmlHttpRequest = new XMLHttpRequest();
+                xmlHttpRequest.onreadystatechange = function(){
+                    if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200) {
+                        alert("已收藏");
+                    }
+                    if (xmlHttpRequest.status == 404) {
+                        alert("服务器繁忙,请稍后再试");
+                    }
+                };
                 xmlHttpRequest.open("POST", "/house/collect", true);
                 xmlHttpRequest.setRequestHeader("Content-type","application/x-www-form-urlencoded");
                 xmlHttpRequest.send("username=" + username + "&url=" + url);
-                //判断是否完成
-                alert("已收藏");
             }
-        }
-
-        function comment(url) {
-            let xmlHttpRequest = new XMLHttpRequest();
-            xmlHttpRequest.onreadystatechange = function() {
-                if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200) {
-                    window.location.href = "/house/comment";
-                }
-            };
-            xmlHttpRequest.open("POST", "/house/comment", true);
-            xmlHttpRequest.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-            xmlHttpRequest.send("url=" + url);
-            // xmlHttpRequest.open("GET", "/house/comment?url=" + url, true);
-            // xmlHttpRequest.send();
         }
 
         function moreInfo(url) {

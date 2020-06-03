@@ -13,6 +13,7 @@
 <head>
     <title>评价</title>
 </head>
+
 <body>
     <h2>评价</h2>
 
@@ -49,11 +50,9 @@
     </table>
 
     <p>房源评价</p>
-    <!-- action -->
-    <form action="" method="post">
-        <textarea name="comment" rows="14" cols="40"></textarea> <br/>
-        <input type="submit" value="评价"/>
-    </form>
+    <textarea id="commentContent" rows="14" cols="40"></textarea> <br/>
+    <p>${msg123}</p>
+    <button id="change" type="button" onclick="commentSubmit('${sessionScope.username}', '${house.url}')"> 评价 </button>
 
     <table>
         <tr>
@@ -77,6 +76,50 @@
             xmlHttpRequest.setRequestHeader("Content-type","application/x-www-form-urlencoded");
             xmlHttpRequest.send("url=" + url);
             window.open(url);
+        }
+
+        function commentSubmit(username, url) {
+            if (username.length == 0) {
+                alert("请先登录后评论");
+            } else {
+                let date = new Date();
+                let commentContent = document.getElementById("commentContent").value;
+                let comment = {
+                    user: {
+                        username: username
+                    },
+                    house: {
+                      url: url
+                    },
+                    time: date.getFullYear() + "年 "
+                        + date.getMonth()  + "月"
+                        + date.getDate() + "日 "
+                        + date.getHours() + ":" + date.getMinutes(),
+                    comment: commentContent
+                };
+                let xmlHttpRequest = new XMLHttpRequest();
+                xmlHttpRequest.onreadystatechange = function() {
+                    if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200) {
+                        switch (xmlHttpRequest.responseText) {
+                            case "success":
+                                window.location.href = window.location.href;
+                                alert("评论成功");
+                                break;
+                            case "fail":
+                                alert("每个用户对每个房源仅能评价一次");
+                                break;
+                            default:
+                                alert("服务器错误，评论失败");
+                        }
+                    }
+                    if (xmlHttpRequest.status == 404) {
+                        alert("服务器错误，评论失败");
+                    }
+                };
+                xmlHttpRequest.open("POST", "/house/comment/submit", true);
+                xmlHttpRequest.setRequestHeader("Content-type", "application/json");
+                xmlHttpRequest.send(JSON.stringify(comment));
+            }
         }
     </script>
 </body>

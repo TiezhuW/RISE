@@ -19,8 +19,8 @@
     <p>用户名： ${sessionScope.username}</p>
     <p>邮箱： ${sessionScope.email}</p>
     <p>手机号： ${sessionScope.phone}</p>
-    <button onclick="location='/user/quit'">退出登录</button>
-    <button onclick="location='/house/homepage'">返回首页</button>
+    <button onclick="location='/user/quit'"> 退出登录 </button>
+    <button onclick="location='/house/homepage'"> 返回首页 </button>
     <hr/>
 
     <p>已收藏房源：</p>
@@ -69,13 +69,13 @@
 
         function cancelCollect(username, url) {
             let xmlHttpRequest = new XMLHttpRequest();
-            xmlHttpRequest.open("POST", "/house/cancelCollect", true);
-            xmlHttpRequest.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-            xmlHttpRequest.send("username=" + username + "&url=" + url);
             xmlHttpRequest.onreadystatechange = function() {
                 if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200)
                     window.location.href = window.location.href;    //刷新
             };
+            xmlHttpRequest.open("POST", "/house/cancelCollect", true);
+            xmlHttpRequest.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            xmlHttpRequest.send("username=" + username + "&url=" + url);
         }
     </script>
 </body>
