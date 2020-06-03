@@ -18,6 +18,7 @@ public interface HouseService {
     void cancelCollect(String username, String url);
 
     House findByUrl(String url);
+    int addHouse(House house);
 
     List<Comment> findCommentByUrl(String url);
     Comment findCommentByUsernameAndUrl(String username, String url);

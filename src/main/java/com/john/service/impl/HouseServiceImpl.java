@@ -61,6 +61,11 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
+    public int addHouse(House house) {
+        return houseRepository.addHouse(house);
+    }
+
+    @Override
     public List<Comment> findCommentByUrl(String url) {
         return houseRepository.findCommentByUrl(url);
     }

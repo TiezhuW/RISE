@@ -84,7 +84,6 @@ public class HouseHandler {
     @PostMapping(value = "/comment/submit")
     @ResponseBody
     public String commentSubmit(@RequestBody Comment comment){
-//        ModelAndView modelAndView = new ModelAndView("comment");
         String username = comment.getUser().getUsername();
         String url = comment.getHouse().getUrl();
         String time = comment.getTime();
@@ -93,11 +92,25 @@ public class HouseHandler {
         if (houseService.findCommentByUsernameAndUrl(username, url) == null) {
             houseService.addComment(username, url, time, commentContent);
             return "success";
-//            return modelAndView;
         } else {
             return "fail";
-//            modelAndView.addObject("msg123", "您已评价过该房源");
-//            return modelAndView;
         }
+    }
+
+    @PostMapping("/add")
+    public ModelAndView addHouse(House house) {
+        ModelAndView modelAndView = new ModelAndView("admin");
+        int ret;
+        try{
+            ret = houseService.addHouse(house);
+        } catch(Exception e) {
+            ret = 0;
+        }
+        if (ret == 1) {
+            modelAndView.addObject("msg","添加成功");
+        } else if(ret == 0) {
+            modelAndView.addObject("msg","添加失败");
+        }
+        return modelAndView;
     }
 }

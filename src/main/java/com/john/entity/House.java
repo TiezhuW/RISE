@@ -4,7 +4,6 @@ import lombok.Data;
 
 @Data
 public class House {
-    private long id;
     private String city;
     private String domain;
     private String direction;
