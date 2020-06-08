@@ -9,16 +9,16 @@
             city = #{arg0}
             and domain = #{arg1}
             <if test="minPrice != 0">
-                and price &gt;= #{arg2}
+                and price &gt;= #{minPrice}
             </if>
             <if test="maxPrice != 0">
-                and price &lt;= #{arg3}
+                and price &lt;= #{maxPrice}
             </if>
             <if test="minArea != 0">
-                and area &gt;= #{arg4}
+                and area &gt;= #{minArea}
             </if>
             <if test="maxArea != 0">
-                and area &lt;= #{arg5}
+                and area &lt;= #{maxArea}
             </if>
         </where>
         order by clicktimes desc
@@ -31,16 +31,16 @@
             city = #{arg0}
             and domain = #{arg1}
             <if test="minPrice != 0">
-                and price &gt;= #{arg2}
+                and price &gt;= #{minPrice}
             </if>
             <if test="maxPrice != 0">
-                and price &lt;= #{arg3}
+                and price &lt;= #{maxPrice}
             </if>
             <if test="minArea != 0">
-                and area &gt;= #{arg4}
+                and area &gt;= #{minArea}
             </if>
             <if test="maxArea != 0">
-                and area &lt;= #{arg5}
+                and area &lt;= #{maxArea}
             </if>
         </where>
         order by area asc
@@ -53,16 +53,16 @@
             city = #{arg0}
             and domain = #{arg1}
             <if test="minPrice != 0">
-                and price &gt;= #{arg2}
+                and price &gt;= #{minPrice}
             </if>
             <if test="maxPrice != 0">
-                and price &lt;= #{arg3}
+                and price &lt;= #{maxPrice}
             </if>
             <if test="minArea != 0">
-                and area &gt;= #{arg4}
+                and area &gt;= #{minArea}
             </if>
             <if test="maxArea != 0">
-                and area &lt;= #{arg5}
+                and area &lt;= #{maxArea}
             </if>
         </where>
         order by area desc
@@ -75,16 +75,16 @@
             city = #{arg0}
             and domain = #{arg1}
             <if test="minPrice != 0">
-                and price &gt;= #{arg2}
+                and price &gt;= #{minPrice}
             </if>
             <if test="maxPrice != 0">
-                and price &lt;= #{arg3}
+                and price &lt;= #{maxPrice}
             </if>
             <if test="minArea != 0">
-                and area &gt;= #{arg4}
+                and area &gt;= #{minArea}
             </if>
             <if test="maxArea != 0">
-                and area &lt;= #{arg5}
+                and area &lt;= #{maxArea}
             </if>
         </where>
         order by price asc
@@ -97,16 +97,16 @@
             city = #{arg0}
             and domain = #{arg1}
             <if test="minPrice != 0">
-                and price &gt;= #{arg2}
+                and price &gt;= #{minPrice}
             </if>
             <if test="maxPrice != 0">
-                and price &lt;= #{arg3}
+                and price &lt;= #{maxPrice}
             </if>
             <if test="minArea != 0">
-                and area &gt;= #{arg4}
+                and area &gt;= #{minArea}
             </if>
             <if test="maxArea != 0">
-                and area &lt;= #{arg5}
+                and area &lt;= #{maxArea}
             </if>
         </where>
         order by price desc

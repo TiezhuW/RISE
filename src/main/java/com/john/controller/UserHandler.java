@@ -35,11 +35,14 @@ public class UserHandler {
     public String login(String username, String password, Model model, HttpSession session){
         String msg;
         boolean ret = userService.login(username, password);
-        if (ret == true) {
+        if (ret == true && !username.equals("Administrator")) {
             User user = userService.getUser(username);
             session.setAttribute("username",username);
             session.setAttribute("email", user.getEmail());
             session.setAttribute("phone", user.getPhone());
+            return "index";
+        } else if (ret == true && username.equals("Administrator")) {
+            session.setAttribute("username",username);
             return "index";
         } else {
             msg = "用户名或密码错误";

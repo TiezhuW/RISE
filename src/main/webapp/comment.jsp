@@ -65,6 +65,7 @@
                 <td> ${comment.user.username} </td>
                 <td> ${comment.time} </td>
                 <td> ${comment.comment} </td>
+                <td> <button class="delete" onclick=""> 删除 </button> </td>
             </tr>
         </c:forEach>
     </table>

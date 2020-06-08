@@ -97,6 +97,11 @@ public class HouseHandler {
         }
     }
 
+    @GetMapping("/admin")
+    public String admin() {
+        return "admin";
+    }
+
     @PostMapping("/add")
     public ModelAndView addHouse(House house) {
         ModelAndView modelAndView = new ModelAndView("admin");
