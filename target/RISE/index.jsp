@@ -97,6 +97,7 @@
                     <td> <button onclick="moreInfo('${house.url}')"> 详情 </button> </td>
                     <td> <button onclick="collect('${sessionScope.username}', '${house.url}')"> 收藏 </button> </td>
                     <td> <button onclick="commentLook('${sessionScope.username}', '${house.url}')"> 评价 </button> </td>
+                    <td> <button class="delete" onclick="deleteHouse('${house.url}')"> 删除 </button> </td>
                 </tr>
             </c:forEach>
         </table>
@@ -108,12 +109,36 @@
     </footer>
 
     <script>
+        let elements = document.getElementsByClassName("delete");
         if ("${sessionScope.username}".length == 0){
             document.getElementById("login").innerHTML = " 登录 ";
             document.getElementById("login").setAttribute("href", "/user/loginPage");
+
+            //非管理员模式下隐藏删除按钮
+            let len = elements.length;
+            for (let i = 0; i < len; i++) {
+                elements[i].style.display = "none";
+            }
         } else {
             document.getElementById("login").innerHTML = "${sessionScope.username}" + "（已登录）";
-            document.getElementById("login").setAttribute("href", "/user/info?username=" + "${sessionScope.username}");
+            if ("${sessionScope.username}" == "Administrator"){
+                document.getElementById("login").setAttribute("href", "/house/admin");
+            } else {
+                document.getElementById("login").setAttribute("href", "/user/info?username=" + "${sessionScope.username}");
+
+                let len = elements.length;
+                for (let i = 0; i < len; i++) {
+                    elements[i].style.display = "none";
+                }
+            }
+        }
+
+        function deleteHouse(url) {
+            let xmlHttpRequest = new XMLHttpRequest();
+            //more
+            xmlHttpRequest.open("POST", "/house/delete", true);
+            xmlHttpRequest.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            xmlHttpRequest.send("url=" + url);
         }
 
         function commentLook(username, url) {

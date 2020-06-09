@@ -118,4 +118,16 @@ public class HouseHandler {
         }
         return modelAndView;
     }
+
+    @PostMapping(value = "/delete", params = {"url"})
+    public String deleteHouse(String url) {
+        System.out.println(url);
+        return "index";
+    }
+
+    @PostMapping(value = "/comment/delete", params = {"username", "url"})
+    public String commentDelete(String username, String url) {
+        System.out.println(username + "\n" + url);
+        return "comment";
+    }
 }

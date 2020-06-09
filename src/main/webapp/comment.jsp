@@ -65,7 +65,7 @@
                 <td> ${comment.user.username} </td>
                 <td> ${comment.time} </td>
                 <td> ${comment.comment} </td>
-                <td> <button class="delete" onclick=""> 删除 </button> </td>
+                <td> <button class="delete" onclick="commentDelete('${comment.user.username}', '${house.url}')"> 删除 </button> </td>
             </tr>
         </c:forEach>
     </table>
@@ -77,6 +77,14 @@
             xmlHttpRequest.setRequestHeader("Content-type","application/x-www-form-urlencoded");
             xmlHttpRequest.send("url=" + url);
             window.open(url);
+        }
+
+        function commentDelete(username, url) {
+            let xmlHttpRequest = new XMLHttpRequest();
+            //more
+            xmlHttpRequest.open("POST", "/house/comment/delete", true);
+            xmlHttpRequest.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            xmlHttpRequest.send("username="+ username + "&url=" + url);
         }
 
         function commentSubmit(username, url) {

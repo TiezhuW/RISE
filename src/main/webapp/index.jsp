@@ -97,7 +97,7 @@
                     <td> <button onclick="moreInfo('${house.url}')"> 详情 </button> </td>
                     <td> <button onclick="collect('${sessionScope.username}', '${house.url}')"> 收藏 </button> </td>
                     <td> <button onclick="commentLook('${sessionScope.username}', '${house.url}')"> 评价 </button> </td>
-                    <td> <button class="delete" onclick=""> 删除 </button> </td>
+                    <td> <button class="delete" onclick="deleteHouse('${house.url}')"> 删除 </button> </td>
                 </tr>
             </c:forEach>
         </table>
@@ -131,6 +131,14 @@
                     elements[i].style.display = "none";
                 }
             }
+        }
+
+        function deleteHouse(url) {
+            let xmlHttpRequest = new XMLHttpRequest();
+            //more
+            xmlHttpRequest.open("POST", "/house/delete", true);
+            xmlHttpRequest.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            xmlHttpRequest.send("url=" + url);
         }
 
         function commentLook(username, url) {

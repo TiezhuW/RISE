@@ -17,7 +17,7 @@ public interface HouseRepository {
 
     House findByUrl(String url);
     int addHouse(House house);
-    //int deleteHouse(String url);
+    int deleteHouse(String url);
 
     void addCollection(String username, String url);
     void deleteCollection(String username, String url);
@@ -25,5 +25,5 @@ public interface HouseRepository {
     List<Comment> findCommentByUrl(String url);
     void addComment(String username, String url, String time, String comment);
     Comment findCommentByUsernameAndUrl(String username, String url);
-    //int deleteComment();
+    int deleteComment(String url);
 }
