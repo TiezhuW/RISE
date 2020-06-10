@@ -13,17 +13,16 @@ public interface HouseRepository {
     List<House> findAllInPriceOrderAsc(String city, String domain, @Param("minPrice") String minPrice, @Param("maxPrice") String maxPrice, @Param("minArea") String minArea, @Param("maxArea") String maxArea);
     List<House> findAllInPriceOrderDesc(String city, String domain, @Param("minPrice") String minPrice, @Param("maxPrice") String maxPrice, @Param("minArea") String minArea, @Param("maxArea") String maxArea);
 
-    void clickTimesInc(String url);
+    int clickTimesInc(String url);
 
     House findByUrl(String url);
     int addHouse(House house);
     int deleteHouse(String url);
 
-    void addCollection(String username, String url);
-    void deleteCollection(String username, String url);
+    int addCollection(String username, String url);
+    int deleteCollection(String username, String url);
 
     List<Comment> findCommentByUrl(String url);
-    void addComment(String username, String url, String time, String comment);
-    Comment findCommentByUsernameAndUrl(String username, String url);
-    int deleteComment(String url);
+    int addComment(String username, String url, String time, String comment);
+    int deleteComment(String username, String url);
 }

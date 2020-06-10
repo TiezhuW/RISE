@@ -60,15 +60,35 @@ public class HouseHandler {
     }
 
     @PostMapping(value = "/collect", params = {"username", "url"})
+    @ResponseBody
     public String collect(String username, String url){
-        houseService.collect(username, url);
-        return "index";
+        int ret;
+        try{
+            ret = houseService.collect(username, url);
+        } catch (Exception e) {
+            ret = 0;
+        }
+        if (ret == 1) {
+            return "success";
+        } else {
+            return "fail";
+        }
     }
 
     @PostMapping(value = "/cancelCollect", params = {"username", "url"})
+    @ResponseBody
     public String cancelCollect(String username, String url){
-        houseService.cancelCollect(username, url);
-        return "userInfo";
+        int ret;
+        try{
+            ret = houseService.cancelCollect(username, url);
+        } catch(Exception e) {
+            ret = 0;
+        }
+        if (ret == 1) {
+            return "success";
+        } else {
+            return "fail";
+        }
     }
 
     @GetMapping(value = "/comment/look", params = {"url"})
@@ -89,8 +109,13 @@ public class HouseHandler {
         String time = comment.getTime();
         String commentContent = comment.getComment();
 
-        if (houseService.findCommentByUsernameAndUrl(username, url) == null) {
-            houseService.addComment(username, url, time, commentContent);
+        int ret;
+        try{
+            ret = houseService.addComment(username, url, time, commentContent);
+        } catch(Exception e) {
+            ret = 0;
+        }
+        if (ret == 1){
             return "success";
         } else {
             return "fail";
@@ -120,14 +145,35 @@ public class HouseHandler {
     }
 
     @PostMapping(value = "/delete", params = {"url"})
+    @ResponseBody
     public String deleteHouse(String url) {
-        System.out.println(url);
-        return "index";
+        int ret;
+        try {
+            ret = houseService.deleteHouse(url);
+            System.out.println("返回值： " + ret);
+        } catch(Exception e) {
+            ret = 0;
+        }
+        if (ret == 1) {
+            return "success";
+        } else {
+            return "fail";
+        }
     }
 
     @PostMapping(value = "/comment/delete", params = {"username", "url"})
-    public String commentDelete(String username, String url) {
-        System.out.println(username + "\n" + url);
-        return "comment";
+    @ResponseBody
+    public String deleteComment(String username, String url) {
+        int ret;
+        try{
+            ret = houseService.deleteComment(username, url);
+        } catch(Exception e) {
+            ret = 0;
+        }
+        if (ret == 1) {
+            return "success";
+        } else {
+            return "fail";
+        }
     }
 }

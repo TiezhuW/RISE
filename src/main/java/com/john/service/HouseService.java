@@ -12,17 +12,16 @@ public interface HouseService {
     List<House> findAllInPriceOrderAsc(String city, String domain, String minPrice, String maxPrice, String minArea, String maxArea);
     List<House> findAllInPriceOrderDesc(String city, String domain, String minPrice, String maxPrice, String minArea, String maxArea);
 
-    void moreInfo(String url);
+    int moreInfo(String url);
 
-    void collect(String username, String url);
-    void cancelCollect(String username, String url);
+    int collect(String username, String url);
+    int cancelCollect(String username, String url);
 
     House findByUrl(String url);
     int addHouse(House house);
-    //int deleteHouse(String url);
+    int deleteHouse(String url);
 
     List<Comment> findCommentByUrl(String url);
-    Comment findCommentByUsernameAndUrl(String username, String url);
-    void addComment(String username, String url, String time, String comment);
-    //int deleteComment();
+    int addComment(String username, String url, String time, String comment);
+    int deleteComment(String username, String url);
 }

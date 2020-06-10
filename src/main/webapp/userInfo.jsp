@@ -70,8 +70,22 @@
         function cancelCollect(username, url) {
             let xmlHttpRequest = new XMLHttpRequest();
             xmlHttpRequest.onreadystatechange = function() {
-                if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200)
-                    window.location.href = window.location.href;    //刷新
+                if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200) {
+                    switch (xmlHttpRequest.responseText) {
+                        case "success":
+                            window.location.href = window.location.href;
+                            alert("收藏取消成功");
+                            break;
+                        case "fail":
+                            alert("收藏取消失败");
+                            break;
+                        default:
+                            alert("服务器错误，收藏取消失败");
+                    }
+                }
+                if (xmlHttpRequest.status == 404) {
+                    alert("服务器错误，收藏取消失败");
+                }
             };
             xmlHttpRequest.open("POST", "/house/cancelCollect", true);
             xmlHttpRequest.setRequestHeader("Content-type","application/x-www-form-urlencoded");

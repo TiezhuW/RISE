@@ -71,6 +71,15 @@
     </table>
 
     <script>
+        let elements = document.getElementsByClassName("delete");
+        if ("${sessionScope.username}" != "Administrator") {
+            //非管理员模式下隐藏删除按钮
+            let len = elements.length;
+            for (let i = 0; i < len; i++) {
+                elements[i].style.display = "none";
+            }
+        }
+
         function moreInfo(url) {
             let xmlHttpRequest = new XMLHttpRequest();
             xmlHttpRequest.open("POST", "/house/moreInfo", true);
@@ -81,8 +90,26 @@
 
         function commentDelete(username, url) {
             let xmlHttpRequest = new XMLHttpRequest();
-            console.log(username);
-            //more
+            xmlHttpRequest.onreadystatechange = function(){
+                if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200) {
+                    if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200) {
+                        switch (xmlHttpRequest.responseText) {
+                            case "success":
+                                window.location.href = window.location.href;
+                                alert("评论已删除");
+                                break;
+                            case "fail":
+                                alert("评论删除失败");
+                                break;
+                            default:
+                                alert("服务器错误，评论删除失败");
+                        }
+                    }
+                }
+                if (xmlHttpRequest.status == 404) {
+                    alert("服务器错误,评论删除失败");
+                }
+            };
             xmlHttpRequest.open("POST", "/house/comment/delete", true);
             xmlHttpRequest.setRequestHeader("Content-type","application/x-www-form-urlencoded");
             xmlHttpRequest.send("username="+ username + "&url=" + url);

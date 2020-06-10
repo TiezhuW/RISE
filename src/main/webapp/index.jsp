@@ -95,7 +95,7 @@
                     <td> ${house.location} </td>
                     <td> ${house.price} </td>
                     <td> <button onclick="moreInfo('${house.url}')"> 详情 </button> </td>
-                    <td> <button onclick="collect('${sessionScope.username}', '${house.url}')"> 收藏 </button> </td>
+                    <td> <button class="collect" onclick="collect('${sessionScope.username}', '${house.url}')"> 收藏 </button> </td>
                     <td> <button onclick="commentLook('${sessionScope.username}', '${house.url}')"> 评价 </button> </td>
                     <td> <button class="delete" onclick="deleteHouse('${house.url}')"> 删除 </button> </td>
                 </tr>
@@ -109,33 +109,54 @@
     </footer>
 
     <script>
-        let elements = document.getElementsByClassName("delete");
+        let deletes = document.getElementsByClassName("delete");
+        let collects = document.getElementsByClassName("collect")
         if ("${sessionScope.username}".length == 0){
             document.getElementById("login").innerHTML = " 登录 ";
             document.getElementById("login").setAttribute("href", "/user/loginPage");
-
             //非管理员模式下隐藏删除按钮
-            let len = elements.length;
+            let len = deletes.length;
             for (let i = 0; i < len; i++) {
-                elements[i].style.display = "none";
+                deletes[i].style.display = "none";
             }
         } else {
             document.getElementById("login").innerHTML = "${sessionScope.username}" + "（已登录）";
             if ("${sessionScope.username}" == "Administrator"){
                 document.getElementById("login").setAttribute("href", "/house/admin");
+                //管理员模式下隐藏收藏按钮
+                let len = collects.length;
+                for (let i = 0; i < len; i++) {
+                    collects[i].style.display = "none";
+                }
             } else {
                 document.getElementById("login").setAttribute("href", "/user/info?username=" + "${sessionScope.username}");
-
-                let len = elements.length;
+                let len = deletes.length;
                 for (let i = 0; i < len; i++) {
-                    elements[i].style.display = "none";
+                    deletes[i].style.display = "none";
                 }
             }
         }
 
         function deleteHouse(url) {
             let xmlHttpRequest = new XMLHttpRequest();
-            //more
+            xmlHttpRequest.onreadystatechange = function(){
+                if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200) {
+                    switch (xmlHttpRequest.responseText) {
+                        case "success":
+                            window.location.href = window.location.href;    //刷新
+                            alert("删除成功");
+                            break;
+                        case "fail":
+                            alert("删除失败");
+                            break;
+                        default:
+                            alert("服务器错误，删除失败");
+                    }
+                }
+                if (xmlHttpRequest.status == 404) {
+                    alert("服务器错误，删除失败");
+                }
+            };
             xmlHttpRequest.open("POST", "/house/delete", true);
             xmlHttpRequest.setRequestHeader("Content-type","application/x-www-form-urlencoded");
             xmlHttpRequest.send("url=" + url);
@@ -156,10 +177,20 @@
                 let xmlHttpRequest = new XMLHttpRequest();
                 xmlHttpRequest.onreadystatechange = function(){
                     if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200) {
-                        alert("已收藏");
+                        switch (xmlHttpRequest.responseText) {
+                            case "success":
+                                window.location.href = window.location.href;    //刷新
+                                alert("收藏成功");
+                                break;
+                            case "fail":
+                                alert("您已经收藏过该房源");
+                                break;
+                            default:
+                                alert("服务器错误，评论失败");
+                        }
                     }
                     if (xmlHttpRequest.status == 404) {
-                        alert("服务器繁忙,请稍后再试");
+                        alert("服务器错误，收藏失败");
                     }
                 };
                 xmlHttpRequest.open("POST", "/house/collect", true);

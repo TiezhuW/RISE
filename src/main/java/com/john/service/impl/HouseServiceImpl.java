@@ -41,18 +41,18 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
-    public void moreInfo(String url) {
-        houseRepository.clickTimesInc(url);
+    public int moreInfo(String url) {
+        return houseRepository.clickTimesInc(url);
     }
 
     @Override
-    public void collect(String username, String url) {
-        houseRepository.addCollection(username, url);
+    public int collect(String username, String url) {
+        return houseRepository.addCollection(username, url);
     }
 
     @Override
-    public void cancelCollect(String username, String url) {
-        houseRepository.deleteCollection(username, url);
+    public int cancelCollect(String username, String url) {
+        return houseRepository.deleteCollection(username, url);
     }
 
     @Override
@@ -66,17 +66,22 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
+    public int deleteHouse(String url) {
+        return houseRepository.deleteHouse(url);
+    }
+
+    @Override
     public List<Comment> findCommentByUrl(String url) {
         return houseRepository.findCommentByUrl(url);
     }
 
     @Override
-    public Comment findCommentByUsernameAndUrl(String username, String url) {
-        return houseRepository.findCommentByUsernameAndUrl(username, url);
+    public int addComment(String username, String url, String time, String comment) {
+        return houseRepository.addComment(username, url, time, comment);
     }
 
     @Override
-    public void addComment(String username, String url, String time, String comment) {
-        houseRepository.addComment(username, url, time, comment);
+    public int deleteComment(String username, String url) {
+        return houseRepository.deleteComment(username, url);
     }
 }
