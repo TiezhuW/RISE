@@ -12,12 +12,63 @@
 <html>
 <head>
     <title>租房信息搜索引擎</title>
+
+    <style type="text/css">
+        h1 {text-align: center}
+
+        a {
+            color: black;
+            text-decoration: none
+        }
+
+        input, select, button {
+            padding: 7px;
+            border-radius: 4px;
+            border: 2px solid black;
+            margin: 7px;
+        }
+
+        input[type=text]:focus {
+            background-color: lightblue;
+            border: 3px solid black;
+        }
+
+        input[type=submit], button {
+            background-color: white;
+            font-size: 14px;
+            transition-duration: 0.4s;
+        }
+
+        input[type=submit]:hover, button:hover {
+            background-color: grey;
+            color: white;
+            box-shadow: 0 7px 7px 0 rgba(0,0,0,0.07), 0 14px 14px 0 rgba(0,0,0,0.14)
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%
+        }
+
+        th, td {
+            border: 1px solid black;
+            text-align: center;
+            padding: 4px;
+            white-space: nowrap
+        }
+
+        footer p {text-align: center}
+        .top {text-align: right}
+    </style>
 </head>
 
 <body>
     <header>
-        <a id="login"></a>
-        <a href="/user/registerPage"> 注册 </a>
+        <div class="top">
+            <a id="login"></a>
+            <a href="/user/registerPage"> 注册 </a>
+        </div>
+        <hr/>
         <a href="/house/homepage"> <h1> 租房信息搜索引擎 </h1> </a>
     </header>
 
@@ -41,45 +92,46 @@
                 <option value="武汉">武汉</option>
                 <option value="西安">西安</option>
             </select>
-             市
+            市
+            <br/>
             区域：
             <select name="domain">
                 <option/>
             </select>
-             区/县 <p> ${nullCityAndDomain} </p>
+            区/县
+            <p> ${nullCityAndDomain} </p>
             价格：
-            <input type="text" name="minPrice"/> 元/月 ~ <input type="text" name="maxPrice"/> 元/月
+            <input type="text" name="minPrice"/>元/月 ~ <input type="text" name="maxPrice"/>元/月
             <br/>
             面积：
-            <input type="text" name="minArea"/> 平方米 ~ <input type="text" name="maxArea"/> 平方米
+            <input type="text" name="minArea"/>平方米 ~ <input type="text" name="maxArea"/>平方米
             <br/>
             排序：
-            <input type="radio" name="order" value="disorder" checked id="order1"/> <label for="order1"> 不排序 </label>
-            <input type="radio" name="order" value="areaOrderAsc" id="order2"/> <label for="order2"> 按面积升序 </label>
-            <input type="radio" name="order" value="areaOrderDesc" id="order3"/> <label for="order3"> 按面积降排序 </label>
-            <input type="radio" name="order" value="priceOrderAsc" id="order4"/> <label for="order4"> 按价格升序 </label>
-            <input type="radio" name="order" value="priceOrderDesc" id="order5"/> <label for="order5"> 按价格降序 </label>
+            <input type="radio" name="order" value="disorder" checked id="order1"/> <label for="order1">不排序 </label>
+            <input type="radio" name="order" value="areaOrderAsc" id="order2"/> <label for="order2">按面积升序 </label>
+            <input type="radio" name="order" value="areaOrderDesc" id="order3"/> <label for="order3">按面积降排序 </label>
+            <input type="radio" name="order" value="priceOrderAsc" id="order4"/> <label for="order4">按价格升序 </label>
+            <input type="radio" name="order" value="priceOrderDesc" id="order5"/> <label for="order5">按价格降序 </label>
             <br/>
+            &emsp;&emsp;&emsp;
             <input type="submit" value="搜索"/>
         </form>
-        <hr/>
     </nav>
 
     <section>
         <table>
             <tr>
-                <td> 城市 </td>
-                <td> 区域 </td>
-                <td> 朝向 </td>
-                <td> 出租类型 </td>
-                <td> 房源概述 </td>
-                <td> 面积/平方米 </td>
-                <td> 楼层 </td>
-                <td> 房屋样式 </td>
-                <td> 电梯 </td>
-                <td> 地址 </td>
-                <td> 价格 </td>
-                <td> 链接 </td>
+                <th> 城市 </th>
+                <th> 区域 </th>
+                <th> 朝向 </th>
+                <th> 出租类型 </th>
+                <th> 房源概述 </th>
+                <th> 面积/平方米 </th>
+                <th> 楼层 </th>
+                <th> 房屋样式 </th>
+                <th> 电梯 </th>
+                <th> 地址 </th>
+                <th> 价格 </th>
             </tr>
             <c:forEach items="${houses}" var="house">
                 <tr>
@@ -94,10 +146,18 @@
                     <td> ${house.lift} </td>
                     <td> ${house.location} </td>
                     <td> ${house.price} </td>
-                    <td> <button onclick="moreInfo('${house.url}')"> 详情 </button> </td>
-                    <td> <button class="collect" onclick="collect('${sessionScope.username}', '${house.url}')"> 收藏 </button> </td>
-                    <td> <button onclick="commentLook('${sessionScope.username}', '${house.url}')"> 评价 </button> </td>
-                    <td> <button class="delete" onclick="deleteHouse('${house.url}')"> 删除 </button> </td>
+                    <td style="border: none">
+                        <button onclick="moreInfo('${house.url}')"> 详情 </button>
+                    </td>
+                    <td style="border: none">
+                        <button class="collect" onclick="collect('${sessionScope.username}', '${house.url}')"> 收藏 </button>
+                    </td>
+                    <td style="border: none">
+                        <button onclick="commentLook('${sessionScope.username}', '${house.url}')"> 评价 </button>
+                    </td>
+                    <td style="border: none">
+                        <button class="delete" onclick="deleteHouse('${house.url}')"> 删除 </button>
+                    </td>
                 </tr>
             </c:forEach>
         </table>

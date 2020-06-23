@@ -180,12 +180,16 @@
         select * from comment where house_url = #{url}
     </select>
 
-    <select id="findCommentByUsernameAndUrl" resultMap="commentMap">
-        select * from comment where username = #{arg0} and house_url = #{arg1}
-    </select>
-
     <insert id="addComment">
         insert into comment values (#{arg0}, #{arg1}, #{arg2}, #{arg3})
     </insert>
 
+    <delete id="deleteComment">
+        delete from comment where username = #{arg0} and house_url = #{arg1}
+    </delete>
+
+    <delete id="deleteHouse" parameterType="java.lang.String">
+        delete from house where url = #{url};
+        delete from comment where house_url = #{url};
+    </delete>
 </mapper>

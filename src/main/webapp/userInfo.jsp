@@ -12,18 +12,72 @@
 <html>
 <head>
     <title>用户信息</title>
+    <style type="text/css">
+        h2, h3 {text-align: center}
+
+        a {
+            color: black;
+            text-decoration: none
+        }
+
+        button {
+            padding: 7px;
+            border-radius: 4px;
+            border: 2px solid black;
+            margin: 7px;
+        }
+
+        button {
+            background-color: white;
+            font-size: 14px;
+            transition-duration: 0.4s;
+        }
+
+        button:hover {
+            background-color: grey;
+            color: white;
+            box-shadow: 0 7px 7px 0 rgba(0,0,0,0.07), 0 14px 14px 0 rgba(0,0,0,0.14)
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%
+        }
+
+        th, td {
+            border: 1px solid black;
+            text-align: center;
+            padding: 4px;
+            white-space: nowrap
+        }
+
+        .top {text-align: right}
+
+        ul {
+            list-style-type: none;
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
-    <h2>用户信息</h2>
+    <div class="top">
+        <a href="/house/homepage"> 返回首页 </a>
+        <a href="/house/quit"> 退出登录 </a>
+        <hr/>
+    </div>
 
-    <p>用户名： ${sessionScope.username}</p>
-    <p>邮箱： ${sessionScope.email}</p>
-    <p>手机号： ${sessionScope.phone}</p>
-    <button onclick="location='/user/quit'"> 退出登录 </button>
-    <button onclick="location='/house/homepage'"> 返回首页 </button>
+    <h2> 用户信息 </h2>
     <hr/>
 
-    <p>已收藏房源：</p>
+
+    <ul>
+        <li> 用户名：${sessionScope.username} </li>
+        <li> 邮箱：&emsp;${sessionScope.email} </li>
+        <li> 手机号：${sessionScope.phone} </li>
+    </ul>
+    <hr/>
+
+    <h3> 已收藏房源 </h3>
     <table>
         <tr>
             <td> 城市 </td>
@@ -37,7 +91,6 @@
             <td> 电梯 </td>
             <td> 地址 </td>
             <td> 价格 </td>
-            <td> 链接 </td>
         </tr>
         <c:forEach items="${collection}" var="house">
             <tr>
@@ -52,11 +105,16 @@
                 <td> ${house.lift} </td>
                 <td> ${house.location} </td>
                 <td> ${house.price} </td>
-                <td> <button onclick="moreInfo('${house.url}')"> 详情 </button> </td>
-                <td> <button onclick="cancelCollect('${sessionScope.username}', '${house.url}')"> 取消收藏 </button> </td>
+                <td style="border: none">
+                    <button onclick="moreInfo('${house.url}')"> 详情 </button>
+                </td>
+                <td style="border: none">
+                    <button onclick="cancelCollect('${sessionScope.username}', '${house.url}')"> 取消收藏 </button>
+                </td>
             </tr>
         </c:forEach>
     </table>
+    <hr/>
 
     <script>
         function moreInfo(url) {
