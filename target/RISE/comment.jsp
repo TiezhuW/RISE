@@ -12,26 +12,71 @@
 <html>
 <head>
     <title>评价</title>
+    <style type="text/css">
+        h2, h3 {text-align: center}
+
+        button, textarea {
+            padding: 7px;
+            border-radius: 4px;
+            border: 2px solid black;
+            margin: 7px;
+        }
+
+        button {
+            background-color: white;
+            font-size: 14px;
+            transition-duration: 0.4s;
+        }
+
+        button:hover {
+            background-color: grey;
+            color: white;
+            box-shadow: 0 7px 7px 0 rgba(0,0,0,0.07), 0 14px 14px 0 rgba(0,0,0,0.14)
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%
+        }
+
+        th, td {
+            border: 1px solid black;
+            text-align: center;
+            padding: 4px;
+            white-space: nowrap
+        }
+
+        textarea {
+            width: 100%;
+            resize: none;
+        }
+
+        textarea:focus {
+            background-color: lightblue;
+            border: 3px solid black;
+        }
+    </style>
 </head>
 
 <body>
     <h2>评价</h2>
+    <hr/>
 
-    <p>房源信息</p>
+    <h3>房源信息</h3>
     <table>
         <tr>
-            <td> 城市 </td>
-            <td> 区域 </td>
-            <td> 朝向 </td>
-            <td> 出租类型 </td>
-            <td> 房源概述 </td>
-            <td> 面积/平方米 </td>
-            <td> 楼层 </td>
-            <td> 房屋样式 </td>
-            <td> 电梯 </td>
-            <td> 地址 </td>
-            <td> 价格 </td>
-            <td> 链接 </td>
+            <th> 城市 </th>
+            <th> 区域 </th>
+            <th> 朝向 </th>
+            <th> 出租类型 </th>
+            <th> 房源概述 </th>
+            <th> 面积/平方米 </th>
+            <th> 楼层 </th>
+            <th> 房屋样式 </th>
+            <th> 电梯 </th>
+            <th> 地址 </th>
+            <th> 价格 </th>
+            <th/>
         </tr>
         <tr>
             <td> ${house.city} </td>
@@ -45,27 +90,32 @@
             <td> ${house.lift} </td>
             <td> ${house.location} </td>
             <td> ${house.price} </td>
-            <td> <button onclick="moreInfo('${house.url}')"> 详情 </button> </td>
+            <td>
+                <button onclick="moreInfo('${house.url}')"> 详情 </button>
+            </td>
         </tr>
     </table>
+    <hr/>
 
-    <p>房源评价</p>
+    <h3>房源评价</h3>
     <textarea id="commentContent" rows="14" cols="40"></textarea> <br/>
-    <p>${msg123}</p>
-    <button id="change" type="button" onclick="commentSubmit('${sessionScope.username}', '${house.url}')"> 评价 </button>
+    <div style="text-align: center">
+        <button id="change" type="button" onclick="commentSubmit('${sessionScope.username}', '${house.url}')"> 评价 </button>
+    </div>
 
     <table>
         <tr>
-            <td> 用户名 </td>
-            <td> 时间 </td>
-            <td> 评论 </td>
+            <th> 用户名 </th>
+            <th> 时间 </th>
+            <th> 评论 </th>
+            <td class="delete"/>
         </tr>
         <c:forEach items="${comments}" var="comment">
             <tr>
                 <td> ${comment.user.username} </td>
                 <td> ${comment.time} </td>
                 <td> ${comment.comment} </td>
-                <td> <button class="delete" onclick="commentDelete('${comment.user.username}', '${house.url}')"> 删除 </button> </td>
+                <td class="delete"> <button onclick="commentDelete('${comment.user.username}', '${house.url}')"> 删除 </button> </td>
             </tr>
         </c:forEach>
     </table>

@@ -132,6 +132,10 @@
                 <th> 电梯 </th>
                 <th> 地址 </th>
                 <th> 价格 </th>
+                <th/>
+                <th class="collect"/>
+                <th/>
+                <th class="delete"/>
             </tr>
             <c:forEach items="${houses}" var="house">
                 <tr>
@@ -146,17 +150,17 @@
                     <td> ${house.lift} </td>
                     <td> ${house.location} </td>
                     <td> ${house.price} </td>
-                    <td style="border: none">
+                    <td>
                         <button onclick="moreInfo('${house.url}')"> 详情 </button>
                     </td>
-                    <td style="border: none">
-                        <button class="collect" onclick="collect('${sessionScope.username}', '${house.url}')"> 收藏 </button>
+                    <td class="collect">
+                        <button onclick="collect('${sessionScope.username}', '${house.url}')"> 收藏 </button>
                     </td>
-                    <td style="border: none">
+                    <td>
                         <button onclick="commentLook('${sessionScope.username}', '${house.url}')"> 评价 </button>
                     </td>
-                    <td style="border: none">
-                        <button class="delete" onclick="deleteHouse('${house.url}')"> 删除 </button>
+                    <td class="delete">
+                        <button onclick="deleteHouse('${house.url}')"> 删除 </button>
                     </td>
                 </tr>
             </c:forEach>

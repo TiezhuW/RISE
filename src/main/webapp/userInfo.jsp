@@ -25,9 +25,6 @@
             border-radius: 4px;
             border: 2px solid black;
             margin: 7px;
-        }
-
-        button {
             background-color: white;
             font-size: 14px;
             transition-duration: 0.4s;
@@ -62,7 +59,7 @@
 <body>
     <div class="top">
         <a href="/house/homepage"> 返回首页 </a>
-        <a href="/house/quit"> 退出登录 </a>
+        <a href="/user/quit"> 退出登录 </a>
         <hr/>
     </div>
 
@@ -80,17 +77,18 @@
     <h3> 已收藏房源 </h3>
     <table>
         <tr>
-            <td> 城市 </td>
-            <td> 区域 </td>
-            <td> 朝向 </td>
-            <td> 出租类型 </td>
-            <td> 房源概述 </td>
-            <td> 面积/平方米 </td>
-            <td> 楼层 </td>
-            <td> 房屋样式 </td>
-            <td> 电梯 </td>
-            <td> 地址 </td>
-            <td> 价格 </td>
+            <th> 城市 </th>
+            <th> 区域 </th>
+            <th> 朝向 </th>
+            <th> 出租类型 </th>
+            <th> 房源概述 </th>
+            <th> 面积/平方米 </th>
+            <th> 楼层 </th>
+            <th> 房屋样式 </th>
+            <th> 电梯 </th>
+            <th> 地址 </th>
+            <th> 价格 </th>
+            <th/><th/>
         </tr>
         <c:forEach items="${collection}" var="house">
             <tr>
@@ -105,10 +103,10 @@
                 <td> ${house.lift} </td>
                 <td> ${house.location} </td>
                 <td> ${house.price} </td>
-                <td style="border: none">
+                <td>
                     <button onclick="moreInfo('${house.url}')"> 详情 </button>
                 </td>
-                <td style="border: none">
+                <td>
                     <button onclick="cancelCollect('${sessionScope.username}', '${house.url}')"> 取消收藏 </button>
                 </td>
             </tr>
