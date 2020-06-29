@@ -1,2 +1,1 @@
-SpringMVC + Spring + Mybatis
-Renting Information Searching Engine
+a renting information searching engine based on SpringMVC + Spring + Mybatis framework
