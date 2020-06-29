@@ -1,1 +1,4 @@
-a renting information searching engine based on SpringMVC + Spring + Mybatis framework
+Language: Java (and HTML + CSS + JavaScript)
+Framework: SpringMVC + Spring + Mybatis
+Database: MySQL
+IDE: Intellij IDEA
