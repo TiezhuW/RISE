@@ -4,10 +4,10 @@
 <mapper namespace="com.john.repository.HouseRepository">
     <select id="findAll" resultType="com.john.entity.House">
         select *
-        from apartments
+        from house
         <where>
             city = #{arg0}
-            and domain = #{arg1}
+            and locate(#{arg1}, domain)
             <if test="minPrice != 0">
                 and price &gt;= #{minPrice}
             </if>
@@ -26,10 +26,10 @@
 
     <select id="findAllInAreaOrderAsc" resultType="com.john.entity.House">
         select *
-        from apartments
+        from house
         <where>
             city = #{arg0}
-            and domain = #{arg1}
+            and locate(#{arg1}, domain)
             <if test="minPrice != 0">
                 and price &gt;= #{minPrice}
             </if>
@@ -48,10 +48,10 @@
 
     <select id="findAllInAreaOrderDesc" resultType="com.john.entity.House">
         select *
-        from apartments
+        from house
         <where>
             city = #{arg0}
-            and domain = #{arg1}
+            and locate(#{arg1}, domain)
             <if test="minPrice != 0">
                 and price &gt;= #{minPrice}
             </if>
@@ -70,10 +70,10 @@
 
     <select id="findAllInPriceOrderAsc" resultType="com.john.entity.House">
         select *
-        from apartments
+        from house
         <where>
             city = #{arg0}
-            and domain = #{arg1}
+            and locate(#{arg1}, domain)
             <if test="minPrice != 0">
                 and price &gt;= #{minPrice}
             </if>
@@ -92,10 +92,10 @@
 
     <select id="findAllInPriceOrderDesc" resultType="com.john.entity.House">
         select *
-        from apartments
+        from house
         <where>
             city = #{arg0}
-            and domain = #{arg1}
+            and locate(#{arg1}, domain)
             <if test="minPrice != 0">
                 and price &gt;= #{minPrice}
             </if>
@@ -117,11 +117,11 @@
     </update>
 
     <select id="findByUrl" parameterType="java.lang.String" resultType="com.john.entity.House">
-        select * from apartments where url = #{url}
+        select * from house where url = #{url}
     </select>
 
     <insert id="addHouse" parameterType="com.john.entity.House">
-        insert into apartments
+        insert into house
         <set>
             city = #{city},
             domain = #{domain},
@@ -189,7 +189,7 @@
     </delete>
 
     <delete id="deleteHouse" parameterType="java.lang.String">
-        delete from apartments where url = #{url};
+        delete from house where url = #{url};
         delete from comment where house_url = #{url};
     </delete>
 </mapper>

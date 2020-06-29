@@ -7,7 +7,7 @@
         from house
         <where>
             city = #{arg0}
-            and domain = #{arg1}
+            and locate(#{arg1}, domain)
             <if test="minPrice != 0">
                 and price &gt;= #{minPrice}
             </if>
@@ -29,7 +29,7 @@
         from house
         <where>
             city = #{arg0}
-            and domain = #{arg1}
+            and locate(#{arg1}, domain)
             <if test="minPrice != 0">
                 and price &gt;= #{minPrice}
             </if>
@@ -51,7 +51,7 @@
         from house
         <where>
             city = #{arg0}
-            and domain = #{arg1}
+            and locate(#{arg1}, domain)
             <if test="minPrice != 0">
                 and price &gt;= #{minPrice}
             </if>
@@ -73,7 +73,7 @@
         from house
         <where>
             city = #{arg0}
-            and domain = #{arg1}
+            and locate(#{arg1}, domain)
             <if test="minPrice != 0">
                 and price &gt;= #{minPrice}
             </if>
@@ -95,7 +95,7 @@
         from house
         <where>
             city = #{arg0}
-            and domain = #{arg1}
+            and locate(#{arg1}, domain)
             <if test="minPrice != 0">
                 and price &gt;= #{minPrice}
             </if>
