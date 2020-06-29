@@ -4,7 +4,7 @@
 <mapper namespace="com.john.repository.HouseRepository">
     <select id="findAll" resultType="com.john.entity.House">
         select *
-        from house
+        from apartments
         <where>
             city = #{arg0}
             and domain = #{arg1}
@@ -26,7 +26,7 @@
 
     <select id="findAllInAreaOrderAsc" resultType="com.john.entity.House">
         select *
-        from house
+        from apartments
         <where>
             city = #{arg0}
             and domain = #{arg1}
@@ -48,7 +48,7 @@
 
     <select id="findAllInAreaOrderDesc" resultType="com.john.entity.House">
         select *
-        from house
+        from apartments
         <where>
             city = #{arg0}
             and domain = #{arg1}
@@ -70,7 +70,7 @@
 
     <select id="findAllInPriceOrderAsc" resultType="com.john.entity.House">
         select *
-        from house
+        from apartments
         <where>
             city = #{arg0}
             and domain = #{arg1}
@@ -92,7 +92,7 @@
 
     <select id="findAllInPriceOrderDesc" resultType="com.john.entity.House">
         select *
-        from house
+        from apartments
         <where>
             city = #{arg0}
             and domain = #{arg1}
@@ -117,11 +117,11 @@
     </update>
 
     <select id="findByUrl" parameterType="java.lang.String" resultType="com.john.entity.House">
-        select * from house where url = #{url}
+        select * from apartments where url = #{url}
     </select>
 
     <insert id="addHouse" parameterType="com.john.entity.House">
-        insert into house
+        insert into apartments
         <set>
             city = #{city},
             domain = #{domain},
@@ -189,7 +189,7 @@
     </delete>
 
     <delete id="deleteHouse" parameterType="java.lang.String">
-        delete from house where url = #{url};
+        delete from apartments where url = #{url};
         delete from comment where house_url = #{url};
     </delete>
 </mapper>

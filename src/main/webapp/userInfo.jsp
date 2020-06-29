@@ -82,7 +82,7 @@
             <th> 朝向 </th>
             <th> 出租类型 </th>
             <th> 房源概述 </th>
-            <th> 面积/平方米 </th>
+            <th> 面积/m<sup>2</sup> </th>
             <th> 楼层 </th>
             <th> 房屋样式 </th>
             <th> 电梯 </th>

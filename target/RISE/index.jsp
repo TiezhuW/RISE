@@ -104,7 +104,7 @@
             <input type="text" name="minPrice"/>元/月 ~ <input type="text" name="maxPrice"/>元/月
             <br/>
             面积：
-            <input type="text" name="minArea"/>平方米 ~ <input type="text" name="maxArea"/>平方米
+            <input type="text" name="minArea"/>m<sup>2</sup> ~ <input type="text" name="maxArea"/>m<sup>2</sup>
             <br/>
             排序：
             <input type="radio" name="order" value="disorder" checked id="order1"/> <label for="order1">不排序 </label>
@@ -126,12 +126,16 @@
                 <th> 朝向 </th>
                 <th> 出租类型 </th>
                 <th> 房源概述 </th>
-                <th> 面积/平方米 </th>
+                <th> 面积/m<sup>2</sup> </th>
                 <th> 楼层 </th>
                 <th> 房屋样式 </th>
                 <th> 电梯 </th>
                 <th> 地址 </th>
                 <th> 价格 </th>
+                <th/>
+                <th class="collect"/>
+                <th/>
+                <th class="delete"/>
             </tr>
             <c:forEach items="${houses}" var="house">
                 <tr>
@@ -146,17 +150,17 @@
                     <td> ${house.lift} </td>
                     <td> ${house.location} </td>
                     <td> ${house.price} </td>
-                    <td style="border: none">
+                    <td>
                         <button onclick="moreInfo('${house.url}')"> 详情 </button>
                     </td>
-                    <td style="border: none">
-                        <button class="collect" onclick="collect('${sessionScope.username}', '${house.url}')"> 收藏 </button>
+                    <td class="collect">
+                        <button onclick="collect('${sessionScope.username}', '${house.url}')"> 收藏 </button>
                     </td>
-                    <td style="border: none">
+                    <td>
                         <button onclick="commentLook('${sessionScope.username}', '${house.url}')"> 评价 </button>
                     </td>
-                    <td style="border: none">
-                        <button class="delete" onclick="deleteHouse('${house.url}')"> 删除 </button>
+                    <td class="delete">
+                        <button onclick="deleteHouse('${house.url}')"> 删除 </button>
                     </td>
                 </tr>
             </c:forEach>

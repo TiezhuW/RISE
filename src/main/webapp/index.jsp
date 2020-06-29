@@ -104,7 +104,7 @@
             <input type="text" name="minPrice"/>元/月 ~ <input type="text" name="maxPrice"/>元/月
             <br/>
             面积：
-            <input type="text" name="minArea"/>平方米 ~ <input type="text" name="maxArea"/>平方米
+            <input type="text" name="minArea"/>m<sup>2</sup> ~ <input type="text" name="maxArea"/>m<sup>2</sup>
             <br/>
             排序：
             <input type="radio" name="order" value="disorder" checked id="order1"/> <label for="order1">不排序 </label>
@@ -126,7 +126,7 @@
                 <th> 朝向 </th>
                 <th> 出租类型 </th>
                 <th> 房源概述 </th>
-                <th> 面积/平方米 </th>
+                <th> 面积/m<sup>2</sup> </th>
                 <th> 楼层 </th>
                 <th> 房屋样式 </th>
                 <th> 电梯 </th>

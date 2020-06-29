@@ -51,7 +51,7 @@
     <div id="all">
         <div class="top">
             <a href="/house/homepage"> 返回首页 </a>
-            <a href="/house/quit"> 退出登录 </a>
+            <a href="/user/quit"> 退出登录 </a>
             <hr/>
         </div>
 
@@ -59,18 +59,18 @@
         <hr/>
 
         <form action="/house/add" method="post">
-            城市：&emsp;&emsp;&emsp;<input type="text" name="city" required="required"><br/>
-            区域：&emsp;&emsp;&emsp;<input type="text" name="domain" required="required"><br/>
-            朝向：&emsp;&emsp;&emsp;<input type="text" name="direction"><br/>
-            出租类型：&emsp;<input type="text" name="type"><br/>
-            房源概述：&emsp;<input type="text" name="name"><br/>
-            面积/平方米：<input type="text" name="area"><br/>
-            楼层：&emsp;&emsp;&emsp;<input type="text" name="floor"><br/>
-            房屋样式：&emsp;<input type="text" name="layout"><br/>
-            电梯：&emsp;&emsp;&emsp;<input type="text" name="lift"><br/>
-            地址：&emsp;&emsp;&emsp;<input type="text" name="location"><br/>
-            价格：&emsp;&emsp;&emsp;<input type="text" name="price"><br/>
-            链接：&emsp;&emsp;&emsp;<input type="text" name="url" required="required"><br/>
+            城市：&emsp;&emsp;<input type="text" name="city" required="required"><br/>
+            区域：&emsp;&emsp;<input type="text" name="domain" required="required"><br/>
+            朝向：&emsp;&emsp;<input type="text" name="direction"><br/>
+            出租类型：<input type="text" name="type"><br/>
+            房源概述：<input type="text" name="name"><br/>
+            面积/m<sup>2</sup>：<input type="text" name="area"><br/>
+            楼层：&emsp;&emsp;<input type="text" name="floor"><br/>
+            房屋样式：<input type="text" name="layout"><br/>
+            电梯：&emsp;&emsp;<input type="text" name="lift"><br/>
+            地址：&emsp;&emsp;<input type="text" name="location"><br/>
+            价格：&emsp;&emsp;<input type="text" name="price"><br/>
+            链接：&emsp;&emsp;<input type="text" name="url" required="required"><br/>
             <input type="submit" value="添加"> <span>${msg}</span>
         </form>
         <hr/>
