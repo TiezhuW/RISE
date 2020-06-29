@@ -67,29 +67,29 @@
         <tr>
             <th> 城市 </th>
             <th> 区域 </th>
+            <th> 房源概述 </th>
+            <th> 价格 </th>
+            <th> 面积/m<sup>2</sup> </th>
             <th> 朝向 </th>
             <th> 出租类型 </th>
-            <th> 房源概述 </th>
-            <th> 面积/m<sup>2</sup> </th>
             <th> 楼层 </th>
             <th> 房屋样式 </th>
             <th> 电梯 </th>
             <th> 地址 </th>
-            <th> 价格 </th>
             <th/>
         </tr>
         <tr>
             <td> ${house.city} </td>
             <td> ${house.domain} </td>
+            <td> ${house.name} </td>
+            <td> ${house.price} </td>
+            <td> ${house.area} </td>
             <td> ${house.direction} </td>
             <td> ${house.type} </td>
-            <td> ${house.name} </td>
-            <td> ${house.area} </td>
             <td> ${house.floor} </td>
             <td> ${house.layout} </td>
             <td> ${house.lift} </td>
             <td> ${house.location} </td>
-            <td> ${house.price} </td>
             <td>
                 <button onclick="moreInfo('${house.url}')"> 详情 </button>
             </td>
