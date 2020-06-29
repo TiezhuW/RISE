@@ -1,4 +1,4 @@
-Language: Java (and HTML + CSS + JavaScript)
-Framework: SpringMVC + Spring + Mybatis
-Database: MySQL
-IDE: Intellij IDEA
+Language: Java (and HTML + CSS + JavaScript) \n
+Framework: SpringMVC + Spring + Mybatis \n
+Database: MySQL \n
+IDE: Intellij IDEA 
