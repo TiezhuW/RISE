@@ -10,7 +10,7 @@
 
 <html>
 <head>
-    <title> 管理员界面 </title>
+    <title> 房源管理 </title>
     <style type="text/css">
         h2 {text-align: center}
 
@@ -55,7 +55,7 @@
             <hr/>
         </div>
 
-        <h2> 房源信息添加 </h2>
+        <h2> 房源添加 </h2>
         <hr/>
 
         <form action="/house/add" method="post">
@@ -74,13 +74,32 @@
             <input type="submit" value="添加"> <span>${msg}</span>
         </form>
         <hr/>
-    </div>
 
+        <h2> 房源更新 </h2>
+        <hr/>
+
+        <button onclick="startEngine()"> 启动爬虫 </button>
+    </div>
 
     <script>
         if ("${sessionScope.username}" != "Administrator") {
             document.getElementById("all").style.display = "none";
             alert("您不具有管理员权限！");
+        }
+
+        function startEngine() {
+            let xmlHttpRequest = new XMLHttpRequest();
+            xmlHttpRequest.onreadystatechange = function(){
+                if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200) {
+                    alert("启动成功");
+                }
+                if (xmlHttpRequest.status == 404) {
+                    alert("服务器错误，启动失败");
+                }
+            };
+            xmlHttpRequest.open("POST", "/house/update", true);
+            xmlHttpRequest.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            xmlHttpRequest.send();
         }
     </script>
 </body>
