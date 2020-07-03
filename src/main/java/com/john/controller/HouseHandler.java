@@ -176,4 +176,10 @@ public class HouseHandler {
             return "fail";
         }
     }
+
+    @PostMapping(value = "/update")
+    public String updateHouse() {
+        //call crawler
+        return "admin";
+    }
 }
